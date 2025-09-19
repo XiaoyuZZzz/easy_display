@@ -1,14 +1,14 @@
 /*
  * @file         : epd.c
  * @Author       : shuyu
- * @LastEditTime : 2025-08-09 15:29
+ * @LastEditTime : 2025-08-17 13:46
  * @Description  : 
  */
 
 
 #include "epd.h"
 
-static SSD1680_SPI epd;
+static BASE_SPI epd;
 
 /**
  * @function:   epdfn_init
@@ -36,7 +36,7 @@ static void read_epd_busy(void) {
  * @brief:      硬件复位
  * @retval:     NULL
  */
- static void epd_reset(void) {
+static void epd_reset(void) {
     DELAY_MS(100);
     epd.set_reset(0);
     DELAY_MS(10);
@@ -52,7 +52,7 @@ static void read_epd_busy(void) {
  * @param{NULL}:      NULL
  * @retval:         NULL
  */
-void epd_init(void) {
+static void epd_init(void) {
     epdfn_init();
     epd.dev->spi_init();
     epd_reset();
@@ -68,7 +68,7 @@ void epd_init(void) {
  * @param{NULL}:  const uint8_t* disp_buf
  * @retval:     NULL
  */
-void epd_display(const uint8_t* disp_buf) {
+static void epd_display(const uint8_t* disp_buf) {
     uint16_t i,j,height,width;
 
     width = (LCD_WIDTH % 8 == 0)? (LCD_WIDTH / 8) : (LCD_WIDTH / 8 + 1);
@@ -89,7 +89,7 @@ void epd_display(const uint8_t* disp_buf) {
  * @param{NULL}:    NULL
  * @retval:         NULL 
  */
-void epd_update(void) {
+static void epd_update(void) {
     epd.write_cmd(UP_MODE_2);
     epd.write_data(0xF4);
     epd.write_cmd(MASTER_Activation);
@@ -102,7 +102,7 @@ void epd_update(void) {
  * @param{NULL}:    NULL
  * @retval:         NULL
  */
-void epd_part_update(void) {
+static void epd_part_update(void) {
     epd.write_cmd(UP_MODE_2);
     epd.write_data(0xDC);
     epd.write_cmd(MASTER_Activation);
@@ -115,7 +115,7 @@ void epd_part_update(void) {
  * @param{NULL}:    NULL
  * @retval:         NULL
  */
-void epd_fast_update(void) {
+static void epd_fast_update(void) {
     epd.write_cmd(UP_MODE_2);
     epd.write_data(0xC7);
     epd.write_cmd(MASTER_Activation);
@@ -129,7 +129,7 @@ void epd_fast_update(void) {
  * @param{NULL}:    NULL
  * @retval:         NULL
  */
-void epd_sleep(void) {
+static void epd_sleep(void) {
     epd.write_cmd(SLEEP_CMD);
     epd.write_data(0xC7);
     DELAY_MS(200);
@@ -142,7 +142,7 @@ void epd_sleep(void) {
  * @param{NULL}: NULL
  * @retval:     NULL
  */
-void epd_fastmode1_init(void) {
+static void epd_fastmode1_init(void) {
     epdfn_init();
     epd.dev->spi_init();
 
@@ -172,7 +172,7 @@ void epd_fastmode1_init(void) {
  * @param{NULL}: NULL
  * @retval:     NULL    
  */
-void epd_fastmode2_init(void) {
+static void epd_fastmode2_init(void) {
     epdfn_init();
     epd.dev->spi_init();
     
@@ -203,7 +203,7 @@ void epd_fastmode2_init(void) {
  * @param{NULL}:    NULL
  * @retval:         NULL
  */
-void epd_disp_clear(void) {
+static void epd_disp_clear(void) {
     uint16_t i;
     epd.write_cmd(0x3C);
     epd.write_data(0x05);
@@ -227,7 +227,7 @@ void epd_disp_clear(void) {
  * @param{NULL}:    NULL
  * @retval:         需要在局部刷新模式下使用
  */
-void epd_disp_part_clear(void) {
+static void epd_disp_part_clear(uint16_t color) {
     u16 i;
     read_epd_busy();
     epd.write_cmd(0x26);
@@ -240,7 +240,7 @@ void epd_disp_part_clear(void) {
 
 
 /**
- * @function:
+ * @function:       ssd1680_driver_init_callback
  * @brief:          提供外部回调初始化
  */
 
@@ -272,4 +272,6 @@ void ssd1680_driver_init_callback(LCD_DRIVER* lcd_driver) {
 
 
     lcd_driver->sleep = epd_sleep;
+
+    lcd_driver->dev_type = DEV_EPD;
  }

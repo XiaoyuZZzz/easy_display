@@ -1,7 +1,7 @@
 /*
  * @file         : 
  * @Author       : shuyu
- * @LastEditTime : 2025-08-09 19:30
+ * @LastEditTime : 2025-08-17 20:09
  * @Description  : 
  */
 #ifndef __MCU_SPI_H__
@@ -34,6 +34,10 @@
 #define SPI_BUSY_GPIO_PIN		GPIO_Pin_12	
 #define SPI_BUSY_GPIO_CLK		RCC_AHB1Periph_GPIOE
 
+#define SPI_BL_GPIO_PORT        GPIOE
+#define SPI_BL_GPIO_PIN         GPIO_Pin_13
+#define SPI_BL_GPIO_CLK         RCC_AHB1Periph_GPIOE
+
 #define SPI_SCL_Clr() GPIO_ResetBits(SPI_SCL_GPIO_PORT,SPI_SCL_GPIO_PIN)
 #define SPI_SCL_Set() GPIO_SetBits(SPI_SCL_GPIO_PORT,SPI_SCL_GPIO_PIN)
 
@@ -51,6 +55,9 @@
 
 #define SPI_ReadBusy GPIO_ReadInputDataBit(SPI_BUSY_GPIO_PORT,SPI_BUSY_GPIO_PIN)
 
+#define SPI_BL_Clr()    GPIO_ResetBits(SPI_BL_GPIO_PORT,SPI_BL_GPIO_PIN)
+#define SPI_BL_Set()    GPIO_SetBits(SPI_BL_GPIO_PORT,SPI_BL_GPIO_PIN)
+
 
 
 void spi_gpio_init(void);
@@ -59,6 +66,7 @@ void spi_set_cs(uint8_t mode);
 void spi_set_dc(uint8_t mode);
 uint8_t spi_read_busy(void);
 void spi_set_reset(uint8_t mode);
+void spi_set_bl(uint8_t mode);
 
 
 /*

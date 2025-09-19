@@ -1,7 +1,7 @@
 /*
  * @file         : mcu_spi.c
  * @Author       : shuyu
- * @LastEditTime : 2025-08-09 17:03
+ * @LastEditTime : 2025-08-17 23:07
  * @Description  : spi底层驱动，示例代码使用软件SPI
  */
 #include "mcu_spi.h"
@@ -10,19 +10,21 @@ void spi_gpio_init(void)
 {
 	GPIO_InitTypeDef GPIO_InitStructure;
 	RCC_AHB1PeriphClockCmd(SPI_SCL_GPIO_CLK|SPI_SDA_GPIO_CLK|SPI_RES_GPIO_CLK
-												 |SPI_DC_GPIO_CLK|SPI_CS_GPIO_CLK|SPI_BUSY_GPIO_CLK,ENABLE);
+												 |SPI_DC_GPIO_CLK|SPI_CS_GPIO_CLK|SPI_BUSY_GPIO_CLK|SPI_BL_GPIO_CLK,ENABLE);
 	
 	GPIO_InitStructure.GPIO_Pin=SPI_SCL_GPIO_PIN;
     GPIO_InitStructure.GPIO_Mode =GPIO_Mode_OUT;
 	GPIO_InitStructure.GPIO_OType=GPIO_OType_PP;
 	GPIO_InitStructure.GPIO_Speed=GPIO_Speed_100MHz;
 	GPIO_Init(SPI_SCL_GPIO_PORT,&GPIO_InitStructure);
+	SPI_SDA_Set();
 	
 	GPIO_InitStructure.GPIO_Pin=SPI_SDA_GPIO_PIN;
     GPIO_InitStructure.GPIO_Mode =GPIO_Mode_OUT;
 	GPIO_InitStructure.GPIO_OType=GPIO_OType_PP;
 	GPIO_InitStructure.GPIO_Speed=GPIO_Speed_100MHz;
 	GPIO_Init(SPI_SDA_GPIO_PORT,&GPIO_InitStructure);
+	SPI_SDA_Set();
 	
 	GPIO_InitStructure.GPIO_Pin=SPI_RES_GPIO_PIN;
     GPIO_InitStructure.GPIO_Mode =GPIO_Mode_OUT;
@@ -35,6 +37,7 @@ void spi_gpio_init(void)
 	GPIO_InitStructure.GPIO_OType=GPIO_OType_PP;
 	GPIO_InitStructure.GPIO_Speed=GPIO_Speed_100MHz;
 	GPIO_Init(SPI_DC_GPIO_PORT,&GPIO_InitStructure);
+	SPI_DC_Set();
 	
 	GPIO_InitStructure.GPIO_Pin=SPI_CS_GPIO_PIN;
     GPIO_InitStructure.GPIO_Mode =GPIO_Mode_OUT;
@@ -46,6 +49,12 @@ void spi_gpio_init(void)
     GPIO_InitStructure.GPIO_Mode =GPIO_Mode_IN;
 	GPIO_InitStructure.GPIO_PuPd=GPIO_PuPd_UP;
 	GPIO_Init(SPI_BUSY_GPIO_PORT,&GPIO_InitStructure);
+
+	GPIO_InitStructure.GPIO_Pin=SPI_BL_GPIO_PIN;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
+	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+	GPIO_InitStructure.GPIO_Speed=GPIO_Speed_100MHz;
+	GPIO_Init(SPI_BL_GPIO_PORT,&GPIO_InitStructure);
 	
 }
 
@@ -79,6 +88,15 @@ void spi_set_reset(uint8_t mode) {
 }
 
 
+void spi_set_bl(uint8_t mode) {
+	if(mode) {
+		GPIO_SetBits(SPI_BL_GPIO_PORT,SPI_BL_GPIO_PIN);
+	}else {
+		GPIO_ResetBits(SPI_BL_GPIO_PORT,SPI_BL_GPIO_PIN);
+	}
+}
+
+
 
 
 uint8_t spi_transbyte(uint8_t dat)
@@ -101,6 +119,8 @@ uint8_t spi_transbyte(uint8_t dat)
 	}
 	SPI_CS_Set();	
 }
+
+
 
 
 

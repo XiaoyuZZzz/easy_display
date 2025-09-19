@@ -7,7 +7,7 @@
 
 #include "sc_log.h" 
 
-const char* sc_log_version = "01-250708";
+const char* sc_log_version = "01-250918";
 
 const char* get_sc_log_version(void) {
 /*
@@ -171,7 +171,6 @@ static uint16_t get_data(uint8_t* dest, uint16_t max_len) {
 /**提供顶部的注册接口设计*/
 /**回调函数内容 */
 void buffer_init(UART_HANDLER* uart_handler) {
-    ring_buffer_init();
     uart_handler->init = ring_buffer_init;
 #if PUSH_CHAR
     uart_handler->push = push_one_char;

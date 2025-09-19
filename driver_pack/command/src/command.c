@@ -19,13 +19,14 @@ REGISTER_COMMAND_FUNCTION(hello) {
     LOG(INFO,RED,"hello world");
 }
 
+/*
 REGISTER_COMMAND_FUNCTION(checkimg) {
     static uint8_t pic;
-    PSI_SET_RESET(1);
-    PSI_SET_RESET(0);
+    SPI_SET_RESET(1);
+    SPI_SET_RESET(0);
 	ui_init();
     ui_buf_clear(WHITE);        
-    ui_clear();
+    ui_clear(0xFF);
     pic++;
     if(pic & 1) {
         ui_show_picture(0,0,152,152,gImage_1,BLACK);
@@ -35,11 +36,12 @@ REGISTER_COMMAND_FUNCTION(checkimg) {
     
     
 }
+*/
 
 /***************************command define***********************/
 REGISTER_COMMAND(SC_VERSION,version);
 REGISTER_COMMAND(SC_HELLO,hello);
-REGISTER_COMMAND(SC_CHECKIMG,checkimg);
+//REGISTER_COMMAND(SC_CHECKIMG,checkimg);
 
 extern COMMAND_ENTRY command_section$$Base[];
 extern COMMAND_ENTRY command_section$$Limit[];

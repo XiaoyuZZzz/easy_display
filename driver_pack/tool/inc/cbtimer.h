@@ -1,7 +1,7 @@
 #ifndef CBTIMER_H__
 #define CBTIMER_H__
 
-#include "time_tick.h"
+#include "tim.h"
 
 #include "stdint.h"
 #include "stdio.h"

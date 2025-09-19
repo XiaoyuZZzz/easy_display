@@ -2,7 +2,7 @@
  * @Author       : SuperYu 824229900@qq.com
  * @Date         : 2025-07-06 16:43
  * @LastEditors  : Please set LastEditors
- * @LastEditTime : 2025-08-09 15:46
+ * @LastEditTime : 2025-09-18 23:22
  * @Description  : 
  */
 /**
@@ -19,19 +19,18 @@
 /*内部文件*/
 #include "sc_log.h"
 #include "c_unit.h"
-#include "command.h"
 #include "cbtimer.h"
 
 /**内部函数*/
 
 
 
-/**版级文件*/
-#include "stm32f4xx.h"
-#include "bsp_uart.h" 
-#include "mcu_flash.h"
-#include "mcu_spi.h"
-#include "board.h"
+/**板级文件*/
+//#include "stm32f4xx.h"
+//#include "bsp_uart.h" 
+//#include "mcu_flash.h"
+//#include "mcu_spi.h"
+//#include "board.h"
 
 
 /**输入你的文件信息 */

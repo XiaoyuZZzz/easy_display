@@ -2,7 +2,7 @@
  * @Author       : SuperYu 824229900@qq.com
  * @Date         : 2025-07-06 15:51
  * @LastEditors  : Please set LastEditors
- * @LastEditTime : 2025-08-09 19:56
+ * @LastEditTime : 2025-08-17 21:58
  * @Description  : 
  */
 #include "board.h"
@@ -24,8 +24,13 @@ int main(void)
 	tick_timer_init();
 	buffer_init(&usart_handler);
 	ui_init();
-	ui_show_picture(0,0,152,152,gImage_2,BLACK);
-	//ui_show_string(0,0,"hello world",16,BLACK);
+	//ui_show_picture(0,0,152,152,gImage_3,BLACK);
+	SPI_SET_BLE(1);
+	
+	TFT_full_color(WHITE);
+	ui_show_string(30,50,"hello world",16,0x001F);
+	//LCD_ShowString(200, 150, "STM32 Display", 0xFFFF, 0x001F, 24, 1);
+	//LCD_FillRect_FastStatic(30,30,50,50,0XFFE0);
 #if 1
 	uint8_t temp_buf[RING_BUFFER_SIZE];
 	uint8_t cmp_buf[RING_BUFFER_SIZE];
@@ -34,7 +39,7 @@ int main(void)
 
 	while(1)
 	{
-		ui_sleep();
+		//ui_sleep();
 /*用于测试自定义段数据是否能够正常处理*/		
 #if 1
 		uint16_t num = usart_handler.get_data(temp_buf, sizeof(temp_buf));
@@ -45,7 +50,19 @@ int main(void)
 		}
 		
 		// 添加短暂延时防止CPU满载
-		delay_ms(1);
+		delay_ms(1000);
+//		TFT_full_color(0XFFE0);
+//		delay_ms(1000);
+//		TFT_full_color(0X07FF);
+//		delay_ms(1000);
+//		TFT_full_color(0xF800);
+//		delay_ms(1000);
+//		TFT_full_color(0xF81F);
+//		delay_ms(1000);
+//		TFT_full_color(0x07E0);
+//		delay_ms(1000);
+//		TFT_full_color(0x7FFF);
+		
 #endif
 #if 0
 		

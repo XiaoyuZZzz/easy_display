@@ -53,7 +53,7 @@ enum {
 #define DEBUG_UART_BIT      (1 << 2)
 #define DEBUG_FLASH_BIT     (1 << 3)
 #define DEBG_ALL_BIT        (DEBUG_UART_BIT | DEBUG_RTT_BIT | DEBUG_FLASH_BIT)
-#define DEBUG_TARGETS       (DEBG_ALL_BIT)
+#define DEBUG_TARGETS       (DEBUG_RTT_BIT)
 
 #if (DEBUG_TARGETS & DEBUG_RTT_BIT) 
 #define ERR_TERMINAL_ID     (0)      
@@ -133,7 +133,10 @@ enum {
 /******************************DRIVER*********************************/
 
 // 默认开启驱动，且开启时是同时支持IIC和SPI
-#define AGREEMENT_ENABLE    (1)
+#define AGREEMENT_ENABLE    (0)
+
+#define USE_EPD         (0)
+#define USE_LCD         (1)
 
 #if AGREEMENT_ENABLE
 #define NOT_AGREEMENT       (1 << 0)
@@ -150,10 +153,9 @@ enum {
 // 用户的屏幕大小
 
 // 注册用户的屏幕大小
-#define LCD_WIDTH	                (152 )
+#define LCD_WIDTH	                (152)
 #define LCD_HEIGHT	                (152)
 
-#define SSD1680_ENABLE             (1)
 #define AGREEMENT_SPI_ENABLE
 
 // 输入用户的SPI初始化函数
@@ -167,16 +169,20 @@ enum {
 
 #define NEED_JUD_BUSY               (1)
 #define NEED_SIPPORT_RESET          (1)
+#define NEED_SPIPORT_BL             (1)
 // 如果需要BUSY线，那么需要开启宏定义
 #if NEED_JUD_BUSY
 #define SPI_READ_BUSY               spi_read_busy
 #endif
 // 如果需要支持RESET引脚，那么需要开启宏定义
 #if NEED_SIPPORT_RESET
-#define PSI_SET_RESET               spi_set_reset
+#define SPI_SET_RESET               spi_set_reset
 #endif
 
-
+// 如果需要支持BL背光引脚，那么需要开启宏定义
+#if NEED_SPIPORT_BL
+#define SPI_SET_BLE                 spi_set_bl
+#endif
 
 
 #endif
