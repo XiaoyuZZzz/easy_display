@@ -26,11 +26,11 @@
 
 
 /**板级文件*/
-//#include "stm32f4xx.h"
-//#include "bsp_uart.h" 
-//#include "mcu_flash.h"
-//#include "mcu_spi.h"
-//#include "board.h"
+#include "stm32f4xx.h"
+#include "bsp_uart.h" 
+#include "mcu_flash.h"
+#include "mcu_spi.h"
+#include "board.h"
 
 
 /**输入你的文件信息 */

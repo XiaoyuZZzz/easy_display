@@ -81,9 +81,9 @@
           </BeforeMake>
           <AfterMake>
             <RunUserProg1>0</RunUserProg1>
-            <RunUserProg2>1</RunUserProg2>
+            <RunUserProg2>0</RunUserProg2>
             <UserProg1Name>fromelf.exe --bin -o "$L@L.bin" "#L"`</UserProg1Name>
-            <UserProg2Name>C:\Users\user\Desktop\Stupid_child\Stupid-child\demo\stm32_f4\example_pro\project\MDK(V5)\keil5_disp_size_bar.exe</UserProg2Name>
+            <UserProg2Name>..\demo\stm32_f4\example_pro\project\MDK(V5)\keil5_disp_size_bar.exe</UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
             <nStopA1X>0</nStopA1X>

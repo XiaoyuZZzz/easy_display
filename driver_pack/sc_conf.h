@@ -133,7 +133,7 @@ enum {
 /******************************DRIVER*********************************/
 
 // 默认开启驱动，且开启时是同时支持IIC和SPI
-#define AGREEMENT_ENABLE    (0)
+#define AGREEMENT_ENABLE    (1)
 
 #define USE_EPD         (0)
 #define USE_LCD         (1)
