@@ -12,7 +12,6 @@
  * @note: 给用户提供结接口的头文件
  */
 
-
 #ifndef USER_CONF_H__
 #define USER_CONF_H__
 
@@ -21,23 +20,14 @@
 #include "c_unit.h"
 #include "cbtimer.h"
 
-/**内部函数*/
-
-
-
-/**板级文件*/
+/**输入你的文件信息 */
 #include "stm32f4xx.h"
-#include "bsp_uart.h" 
+#include "bsp_uart.h"
 #include "mcu_flash.h"
 #include "mcu_spi.h"
 #include "board.h"
 
-
-/**输入你的文件信息 */
-
-
-
-
-
+/**内部函数*/
+#define get_system_tick get_heart_tick_time
 
 #endif

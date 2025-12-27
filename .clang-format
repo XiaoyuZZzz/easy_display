@@ -26,7 +26,7 @@ AccessModifierOffset: -4
 # -- DontAlign - 不进行对齐
 # -- Left - 反斜杠靠左对齐
 # -- Right - 反斜杠靠右对齐
-# AlignEscapedNewlines: Right
+AlignEscapedNewlines: DontAlign
 
 # 二元、三元表达式的对齐方式（当表达式需要占用多行时）
 # -- DontAlign - 不进行对齐
@@ -41,7 +41,7 @@ AlignOperands:   true
 # AllowAllParametersOfDeclarationOnNextLine: false
 
 # # 是否允许短的代码块放在同一行
-# AllowShortBlocksOnASingleLine: false
+AllowShortBlocksOnASingleLine: true
 
 # # 短的case标签和语句放在同一行
 # AllowShortCaseLabelsOnASingleLine: true
@@ -58,7 +58,7 @@ AllowShortFunctionsOnASingleLine: InlineOnly
 # AllowShortIfStatementsOnASingleLine: true
 
 # # 短的循环保持在同一行
-# AllowShortLoopsOnASingleLine: true
+AllowShortLoopsOnASingleLine: true
 
 # # 总是在返回类型后换行: None, All, TopLevel(顶级函数，不包括在类中的函数), 
 # # AllDefinitions(所有的定义，不包括声明), TopLevelDefinitions(所有的顶级函数的定义)
@@ -96,15 +96,15 @@ BreakBeforeBraces: Custom
 # 大括号换行，只有当BreakBeforeBraces设置为Custom时才有效
 BraceWrapping:
   # class定义后面
-  AfterClass: true
+  AfterClass: false
   # 控制语句后面
   AfterControlStatement: false
   # enum定义后面
   AfterEnum: false
   # 函数定义后面
-  AfterFunction: true
+  AfterFunction: false
   # 命名空间定义后面
-  AfterNamespace: true
+  AfterNamespace: false
   # ObjC定义后面
   AfterObjCDeclaration: false
   # struct定义后面
@@ -224,7 +224,7 @@ IndentCaseLabels: true
 # -- None - 不进行缩进
 # -- AfterHash - 在前导'#'后缩进，'#'放在最左侧，之后的语句参与缩进
 # -- BeforeHash - 在前导'#'前进行缩进
-IndentPPDirectives: AfterHash
+IndentPPDirectives: None
 
 # # 函数返回类型换行时，缩进函数声明或函数定义的函数名
 # IndentWrappedFunctionNames: false
@@ -244,10 +244,10 @@ JavaScriptQuotes: Leave
 KeepEmptyLinesAtTheStartOfBlocks: true
 
 # 用于识别宏定义型块起始的正则表达式
-# MacroBlockBegin: ''
+#MacroBlockBegin: ""
 
 # 用于识别宏定义型块结束的正则表达式
-# MacroBlockEnd:   ''
+#MacroBlockEnd:   ""
 
 # # 连续空行的最大数量
 MaxEmptyLinesToKeep: 1

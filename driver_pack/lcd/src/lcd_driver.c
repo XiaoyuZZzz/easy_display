@@ -7,13 +7,10 @@
  */
 #include "lcd_driver.h"
 
-// TODO:目前无法支持多个SPI—LCD设备
-static SPI_DEV spi_dev = {
-    .spi_init = SPI_INIT,
-    .spi_transbyte = SPI_SWAP_BYTE,
-    .set_cs = SPI_SET_CS,
-    .set_dc = SPI_SET_DC
-};
+static SPI_DEV spi_dev = {.spi_init = SPI_INIT,
+                          .spi_transbyte = SPI_SWAP_BYTE,
+                          .set_cs = SPI_SET_CS,
+                          .set_dc = SPI_SET_DC};
 
 /**
  * @fuunciton:      spi_write_reg
@@ -43,7 +40,6 @@ static void spi_write_data(uint8_t data) {
     spi_dev.set_dc(1);
 }
 
-
 /**
  * @funciton:       spi_write_double_data
  * @breif:          写入两个字节的数据
@@ -51,19 +47,15 @@ static void spi_write_data(uint8_t data) {
  * @retval:         NULL
  */
 static void spi_write_double_data(uint16_t data) {
-    spi_write_data(data>>8);
+    spi_write_data(data >> 8);
     spi_write_data(data);
 }
 
-
 // TODO:目前无法支持多个SPI—LCD设备
-void lcd_fn_register(BASE_SPI* lcd_dev) {
+void lcd_fn_register(BASE_SPI *lcd_dev) {
     lcd_dev->dev = &spi_dev;
     lcd_dev->write_cmd = spi_write_cmd;
     lcd_dev->write_data = spi_write_data;
     lcd_dev->read_busy = SPI_READ_BUSY;
     lcd_dev->set_reset = SPI_SET_RESET;
 }
-
-
-
